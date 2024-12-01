@@ -25,4 +25,4 @@ def get_filename(htmlstring):
     return legitimize(unescape_html(htmlstring))
 
 def parameterize(string):
-    return "'%s'" % string.replace("'", r"'\''")
+    return "'" + string.replace("'", r"'\''") + "'"
