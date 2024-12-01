@@ -742,9 +742,10 @@ def merge_stts(samples_list):
 def merge_stss(samples, sample_number_list):
     results = []
     start = 0
-    for samples, sample_number_list in zip(samples, sample_number_list):
-        results.extend(map(lambda x: start + x, samples))
-        start += sample_number_list
+    for s, num in zip(samples, sample_number_list):
+        for x in s:
+            results.append(start + x)
+        start += num
     return results
 
 def merge_stsc(chunks_list, total_chunk_number_list):
