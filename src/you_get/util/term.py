@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
+import fcntl
+import struct
+import termios
+
 def get_terminal_size():
     """Get (width, height) of the current terminal."""
     try:
-        import fcntl, termios, struct # fcntl module only available on Unix
-        return struct.unpack('hh', fcntl.ioctl(1, termios.TIOCGWINSZ, '1234'))
-    except:
+        return struct.unpack('hh', fcntl.ioctl(1, termios.TIOCGWINSZ, struct.pack('hh', 0, 0)))
+    except Exception:
         return (40, 80)
